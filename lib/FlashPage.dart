@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 
 class FlashPage extends StatefulWidget {
-  const FlashPage({super.key});
+  final String frontChar;
+  final String backChar;
+
+
+  const FlashPage({super.key, required this.frontChar, required this.backChar});
+
 
   @override
   State<FlashPage> createState() => _FlashPageState();
@@ -41,10 +46,9 @@ class _FlashPageState extends State<FlashPage> {
                                 color: Colors.purple[50],
                                 border: Border.all(color: const Color.fromRGBO(206, 147, 216, 1), width:3,)
                                 ),
-                                child: const Text(
-                                  
-                                    'అ',
-                                    style: TextStyle(fontSize: 200),
+                                child: Text(
+                                    widget.frontChar,
+                                    style: const TextStyle(fontSize: 200),
                                 ),
                           ),
                         ),
@@ -65,10 +69,10 @@ class _FlashPageState extends State<FlashPage> {
                                 color: Colors.purple[50],
                                 border: Border.all(color: const Color.fromRGBO(206, 147, 216, 1), width:3,)
                                 ),
-                                child: const Text(
+                                child: Text(
                                   
-                                    'A',
-                                    style: TextStyle(fontSize: 200),
+                                    widget.backChar,
+                                    style: const TextStyle(fontSize: 200),
                                 ),
                           ),
                         ),
@@ -117,10 +121,9 @@ class _FlashPageState extends State<FlashPage> {
                           color: Colors.purple[50],
                           border: Border.all(color: const Color.fromRGBO(206, 147, 216, 1), width:3,)
                           ),
-                          child: const Text(
-                            
-                              'అ',
-                              style: TextStyle(fontSize: 200),
+                          child: Text(
+                              widget.frontChar,
+                              style: const TextStyle(fontSize: 200),
                           ),
                     ),
                   ),

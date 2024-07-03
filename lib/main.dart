@@ -118,7 +118,9 @@ class _MyHomePageState extends State<MyHomePage> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const FlashPage(),
+                          //builder: (context) => const FlashPage(frontChar: 'H', backChar: 'A'),
+                          builder: (context) => const FourPage(),
+
                         ),
                       );
                     },
