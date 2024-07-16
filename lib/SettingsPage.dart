@@ -10,6 +10,20 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
+  String dropdownnvalue = 'English';
+  var items = [
+    'English',
+    'Telugu',
+    'Tamil',
+    'Hindi',
+  ];
+  String dropdownnvalue1 = 'Telugu';
+  var items1 = [
+    'Telugu',
+    'Tamil',
+    'Hindi',
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,19 +40,83 @@ class _SettingsPageState extends State<SettingsPage> {
           padding: const EdgeInsets.all(10.0),
           children: <Widget>[
             ClipRRect(
-              borderRadius: BorderRadius.circular(20),
+              borderRadius: BorderRadius.circular(50),
               child: Container(
-                color: Colors.amber[600],
+                color: Color.fromARGB(255, 239, 215, 255),
                 height: 10,
-                child: const Center(child: Text('Item 1')),
+                child: Center(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Center(child: Text('Input language: ')),
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(10),
+                          border: Border.all(color: Colors.grey),
+                        ),
+                        child: DropdownButtonHideUnderline(
+                          child: DropdownButton<String>(
+                            value: dropdownnvalue,
+                            icon: const Icon(Icons.keyboard_arrow_down),
+                            items: items.map((String items) {
+                              return DropdownMenuItem(
+                                value: items,
+                                child: Text(items),
+                              );
+                            }).toList(),
+                            onChanged: (String? newValue) {
+                              setState(() {
+                                dropdownnvalue = newValue!;
+                              });
+                            },
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               ),
             ),
             ClipRRect(
-              borderRadius: BorderRadius.circular(20),
+              borderRadius: BorderRadius.circular(50),
               child: Container(
-                color: Colors.amber[600],
+                color: Color.fromARGB(255, 239, 215, 255),
                 height: 10,
-                child: const Center(child: Text('Item 2')),
+                child: Center(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Center(child: Text('Output language: ')),
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(10),
+                          border: Border.all(color: Colors.grey),
+                        ),
+                        child: DropdownButtonHideUnderline(
+                          child: DropdownButton<String>(
+                            value: dropdownnvalue1,
+                            icon: const Icon(Icons.keyboard_arrow_down),
+                            items: items1.map((String items1) {
+                              return DropdownMenuItem(
+                                value: items1,
+                                child: Text(items1),
+                              );
+                            }).toList(),
+                            onChanged: (String? newValue) {
+                              setState(() {
+                                dropdownnvalue1 = newValue!;
+                              });
+                            },
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               ),
             ),
           ],

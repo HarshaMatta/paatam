@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'SettingsPage.dart';
-import 'FlashPage.dart';
 import 'FourPage.dart';
 
 
@@ -149,7 +148,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 ),
                               ), 
                     
-                    
+                    //telugu
                                   GridView.count(
                                     primary: false,
                                     shrinkWrap: true,
@@ -165,9 +164,8 @@ class _MyHomePageState extends State<MyHomePage> {
                                     ],
                                   ),
                           ],
-                    
-                      ),
-                    
+                    //அ
+                      ), 
                     ),
                   ),
                   Container(
@@ -291,6 +289,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                   // mainAxisSpacing: 10,
                                   crossAxisCount: 2,
                                   children: const <Widget>[
+                                    
                                     Center(child: Text("a", style: TextStyle(fontSize: 30, fontVariations:[FontVariation('wght', 750), FontVariation('wdth', 150)]),)),
                                     Center(child: Icon(CupertinoIcons.arrow_turn_right_down)),
                                     Center(child: Icon(CupertinoIcons.arrow_turn_down_right)),
