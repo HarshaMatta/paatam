@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'DataFunctions.dart';
+
 
 class FlashPage extends StatefulWidget {
   final String frontChar;
@@ -19,6 +21,15 @@ class _FlashPageState extends State<FlashPage> {
     setState(() {
       _showCardContent = !_showCardContent;
     });
+  }
+
+  void _updateAndOpenPage(BuildContext context, bool correct) async {
+    var updatedList = changeIndex(vowelList, correct);
+    setState(() {
+      vowelList = updatedList;
+    });
+    //debugPrint(vowelList); // Log the updated vowelList
+    openPage(vowelList, context);
   }
 
   @override
@@ -83,10 +94,11 @@ class _FlashPageState extends State<FlashPage> {
                       padding: const EdgeInsets.only(bottom: 20),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        
                         children: [
                           ElevatedButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              _updateAndOpenPage(context, false);
+                            },
                             style: ElevatedButton.styleFrom(
                               shape: const CircleBorder(),
                               padding: const EdgeInsets.all(20),
@@ -94,7 +106,9 @@ class _FlashPageState extends State<FlashPage> {
                             child: const Icon(Icons.close, size: 50),
                           ),
                           ElevatedButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              _updateAndOpenPage(context, true);
+                            },
                             style: ElevatedButton.styleFrom(
                               shape: const CircleBorder(),
                               padding: const EdgeInsets.all(20),

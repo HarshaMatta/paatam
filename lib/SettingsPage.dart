@@ -14,14 +14,17 @@ class _SettingsPageState extends State<SettingsPage> {
   var items = [
     'English',
     'Telugu',
-    'Tamil',
     'Hindi',
+    'Kannada',
+    'Malayalam'
   ];
   String dropdownnvalue1 = 'Telugu';
   var items1 = [
     'Telugu',
     'Tamil',
     'Hindi',
+    'Kannada',
+    'Malayalam'
   ];
 
   @override
@@ -42,7 +45,7 @@ class _SettingsPageState extends State<SettingsPage> {
             ClipRRect(
               borderRadius: BorderRadius.circular(50),
               child: Container(
-                color: Color.fromARGB(255, 239, 215, 255),
+                color: const Color.fromARGB(255, 239, 215, 255),
                 height: 10,
                 child: Center(
                   child: Row(
@@ -82,7 +85,7 @@ class _SettingsPageState extends State<SettingsPage> {
             ClipRRect(
               borderRadius: BorderRadius.circular(50),
               child: Container(
-                color: Color.fromARGB(255, 239, 215, 255),
+                color: const Color.fromARGB(255, 239, 215, 255),
                 height: 10,
                 child: Center(
                   child: Row(
@@ -110,6 +113,7 @@ class _SettingsPageState extends State<SettingsPage> {
                               setState(() {
                                 dropdownnvalue1 = newValue!;
                               });
+                              
                             },
                           ),
                         ),
