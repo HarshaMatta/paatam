@@ -111,7 +111,7 @@ class _SettingsPageState extends State<SettingsPage> {
                             }).toList(),
                             onChanged: (String? newValue) {
                               setState(() {
-                                dropdownnvalue1 = newValue!;
+                                dropdownnvalue1 = newValue!;  
                               });
                               
                             },

@@ -96,14 +96,6 @@ class _MyHomePageState extends State<MyHomePage> {
                 children: <Widget>[
                   GestureDetector(
                     onTap: () { 
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //     //builder: (context) => const FlashPage(frontChar: 'H', backChar: 'A'),
-                      //     builder: (context) => const FourPage(),
-
-                      //   ),
-                      // );
                       openPage(vowelList, context);
                     },
 
@@ -150,93 +142,105 @@ class _MyHomePageState extends State<MyHomePage> {
                       ), 
                     ),
                   ),
-                  Container(
-                    padding: const EdgeInsets.all(8),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.0),
-                      color: Colors.purple[50],
-                      border: Border.all(color: const Color.fromRGBO(206, 147, 216, 1), width:3,)
-                    ),
-                    child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisSize: MainAxisSize.min,
-                        children: <Widget> [
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(20),
-                              child: Container(
-                                color: Colors.purple[400],
-                                child:const Align(
-                                  alignment: Alignment.center, 
-                                  child: Text("Consonants", 
-                                  style: TextStyle( color: Colors.white, fontVariations:[FontVariation('wght', 750), FontVariation('wdth', 150)]),
+                  GestureDetector(
+                    onTap: () { 
+                      openPage(consonantList, context);
+                    },
+
+                    child: Container(
+                      padding: const EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10.0),
+                        color: Colors.purple[50],
+                        border: Border.all(color: const Color.fromRGBO(206, 147, 216, 1), width:3,)
+                      ),
+                      child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisSize: MainAxisSize.min,
+                          children: <Widget> [
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(20),
+                                child: Container(
+                                  color: Colors.purple[400],
+                                  child:const Align(
+                                    alignment: Alignment.center, 
+                                    child: Text("Consonants", 
+                                    style: TextStyle( color: Colors.white, fontVariations:[FontVariation('wght', 750), FontVariation('wdth', 150)]),
+                                    ),
                                   ),
                                 ),
-                              ),
-                            ), 
-
-
-                                GridView.count(
-                                  primary: false,
-                                  shrinkWrap: true,
-                                  // padding: const EdgeInsets.all(00),
-                                  // crossAxisSpacing: 10,
-                                  // mainAxisSpacing: 10,
-                                  crossAxisCount: 2,
-                                  children: const <Widget>[
-                                    Center(child: Text("ka", style: TextStyle(fontSize: 30, fontVariations:[FontVariation('wght', 750), FontVariation('wdth', 150)]),)),
-                                    Center(child: Icon(CupertinoIcons.arrow_turn_right_down)),
-                                    Center(child: Icon(CupertinoIcons.arrow_turn_down_right)),
-                                    Center(child: Text("క", style: TextStyle(fontSize: 30, fontVariations:[FontVariation('wght', 750), FontVariation('wdth', 150)], fontFamily: "Noto"),)),
-                                  ],
-                                ),
-                        ],
-
+                              ), 
+                    
+                    
+                                  GridView.count(
+                                    primary: false,
+                                    shrinkWrap: true,
+                                    // padding: const EdgeInsets.all(00),
+                                    // crossAxisSpacing: 10,
+                                    // mainAxisSpacing: 10,
+                                    crossAxisCount: 2,
+                                    children: const <Widget>[
+                                      Center(child: Text("ka", style: TextStyle(fontSize: 30, fontVariations:[FontVariation('wght', 750), FontVariation('wdth', 150)]),)),
+                                      Center(child: Icon(CupertinoIcons.arrow_turn_right_down)),
+                                      Center(child: Icon(CupertinoIcons.arrow_turn_down_right)),
+                                      Center(child: Text("క", style: TextStyle(fontSize: 30, fontVariations:[FontVariation('wght', 750), FontVariation('wdth', 150)], fontFamily: "Noto"),)),
+                                    ],
+                                  ),
+                          ],
+                    
+                      ),
+                    
                     ),
-                  
                   ),
-                  Container(
-                    padding: const EdgeInsets.all(8),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.0),
-                      color: Colors.purple[50],
-                      border: Border.all(color: const Color.fromRGBO(206, 147, 216, 1), width:3,)
-                    ),
-                    child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisSize: MainAxisSize.min,
-                        children: <Widget> [
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(20),
-                              child: Container(
-                                color: Colors.purple[400],
-                                child:const Align(
-                                  alignment: Alignment.center, 
-                                  child: Text("Clusters", 
-                                  style: TextStyle( color: Colors.white, fontVariations:[FontVariation('wght', 750), FontVariation('wdth', 150)]),
+                  GestureDetector(
+                    onTap: () { 
+                      openPage(clusterList, context);
+                    },
+
+                    child: Container(
+                      padding: const EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10.0),
+                        color: Colors.purple[50],
+                        border: Border.all(color: const Color.fromRGBO(206, 147, 216, 1), width:3,)
+                      ),
+                      child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisSize: MainAxisSize.min,
+                          children: <Widget> [
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(20),
+                                child: Container(
+                                  color: Colors.purple[400],
+                                  child:const Align(
+                                    alignment: Alignment.center, 
+                                    child: Text("Clusters", 
+                                    style: TextStyle( color: Colors.white, fontVariations:[FontVariation('wght', 750), FontVariation('wdth', 150)]),
+                                    ),
                                   ),
                                 ),
-                              ),
-                            ), 
-
-
-                                GridView.count(
-                                  primary: false,
-                                  shrinkWrap: true,
-                                  // padding: const EdgeInsets.all(00),
-                                  // crossAxisSpacing: 10,
-                                  // mainAxisSpacing: 10,
-                                  crossAxisCount: 2,
-                                  children: const <Widget>[
-                                    Center(child: Text("kra", style: TextStyle(fontSize: 30, fontVariations:[FontVariation('wght', 750), FontVariation('wdth', 150)]),)),
-                                    Center(child: Icon(CupertinoIcons.arrow_turn_right_down)),
-                                    Center(child: Icon(CupertinoIcons.arrow_turn_down_right)),
-                                    Center(child: Text("క్ర", style: TextStyle(fontSize: 30, fontVariations:[FontVariation('wght', 750), FontVariation('wdth', 150)], fontFamily: "Noto"),)),
-                                  ],
-                                ),
-                        ],
-
+                              ), 
+                    
+                    
+                                  GridView.count(
+                                    primary: false,
+                                    shrinkWrap: true,
+                                    // padding: const EdgeInsets.all(00),
+                                    // crossAxisSpacing: 10,
+                                    // mainAxisSpacing: 10,
+                                    crossAxisCount: 2,
+                                    children: const <Widget>[
+                                      Center(child: Text("kra", style: TextStyle(fontSize: 30, fontVariations:[FontVariation('wght', 750), FontVariation('wdth', 150)]),)),
+                                      Center(child: Icon(CupertinoIcons.arrow_turn_right_down)),
+                                      Center(child: Icon(CupertinoIcons.arrow_turn_down_right)),
+                                      Center(child: Text("క్ర", style: TextStyle(fontSize: 30, fontVariations:[FontVariation('wght', 750), FontVariation('wdth', 150)], fontFamily: "Noto"),)),
+                                    ],
+                                  ),
+                          ],
+                    
+                      ),
+                    
                     ),
-                  
                   ),
                   Container(
                     padding: const EdgeInsets.all(8),

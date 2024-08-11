@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'DataFunctions.dart';
+import 'main.dart';
 
 
 class FlashPage extends StatefulWidget {
   final String frontChar;
   final String backChar;
+  final Future<List<List<dynamic>>> list;
 
 
-  const FlashPage({super.key, required this.frontChar, required this.backChar});
+  const FlashPage({super.key, required this.frontChar, required this.backChar, required this.list});
 
 
   @override
@@ -23,18 +25,29 @@ class _FlashPageState extends State<FlashPage> {
     });
   }
 
-  void _updateAndOpenPage(BuildContext context, bool correct) async {
-    var updatedList = changeIndex(vowelList, correct);
+  void _updateAndOpenPage(BuildContext context, Future<List<List<dynamic>>> list, bool correct) async {
+    var updatedList = changeIndex(list, correct);
     setState(() {
-      vowelList = updatedList;
+      list = updatedList;
     });
     //debugPrint(vowelList); // Log the updated vowelList
-    openPage(vowelList, context);
+    openPage(list, context);
   }
 
+
+
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context ) {
+    
+
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        child: const Icon(Icons.home),
+        onPressed: () => Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const MyHomePage(title: 'PAATAM')),
+        ),
+      ),
       body: GestureDetector(
         onTap: _toggleCardContent,
         child: Center(
@@ -42,6 +55,7 @@ class _FlashPageState extends State<FlashPage> {
               ? Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
+
                      Padding(
                       padding: const EdgeInsets.only(top:100.0, left:30, right: 30),
                       child: Align(
@@ -97,7 +111,7 @@ class _FlashPageState extends State<FlashPage> {
                         children: [
                           ElevatedButton(
                             onPressed: () {
-                              _updateAndOpenPage(context, false);
+                              _updateAndOpenPage(context, widget.list, false);
                             },
                             style: ElevatedButton.styleFrom(
                               shape: const CircleBorder(),
@@ -107,7 +121,7 @@ class _FlashPageState extends State<FlashPage> {
                           ),
                           ElevatedButton(
                             onPressed: () {
-                              _updateAndOpenPage(context, true);
+                              _updateAndOpenPage(context, widget.list, true);
                             },
                             style: ElevatedButton.styleFrom(
                               shape: const CircleBorder(),

@@ -41,15 +41,18 @@ Future<List<List<dynamic>>> parseJsonTo2DArray(String category, String lang1, St
   return result;
 }
 
-Future<List<List<dynamic>>> vowelList= parseJsonTo2DArray("vowels", "LATN", "TELU");
+Future<List<List<dynamic>>> vowelList= parseJsonTo2DArray("vowels", "English", "Telugu");
+Future<List<List<dynamic>>> consonantList= parseJsonTo2DArray("consonants", "English", "Telugu");
+Future<List<List<dynamic>>> clusterList= parseJsonTo2DArray("clusters", "English", "Telugu");
 
-Future<void> openPage(Future<List<List<dynamic>>> futureList, BuildContext context) async {
+
+Future<void> openPage(Future<List<List<dynamic>>> futureList, BuildContext context, ) async {
   List<List<dynamic>> list = await futureList; // Await the future to get the actual list
 
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => FlashPage(frontChar: list[0][0], backChar: list[0][1]),
+        builder: (context) => FlashPage(frontChar: list[0][0], backChar: list[0][1], list: futureList,),
       ),
     );
   
@@ -69,7 +72,7 @@ Future<List<List<dynamic>>> changeIndex(Future<List<List<dynamic>>> futureList,b
     newIndex = fibonacciNumbers[list[0][2]];
   }
   else {
-    newIndex = 5;
+    newIndex = 2;
     list[0][2] = 0;
   }
   
@@ -87,6 +90,5 @@ Future<List<List<dynamic>>> changeIndex(Future<List<List<dynamic>>> futureList,b
 
   return list;
 }
-
 
 
