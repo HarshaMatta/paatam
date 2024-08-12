@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'DataFunctions.dart';
 import 'main.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 
 
 class FlashPage extends StatefulWidget {
@@ -43,11 +44,14 @@ class _FlashPageState extends State<FlashPage> {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.home),
+        
         onPressed: () => Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (context) => const MyHomePage(title: 'PAATAM')),
         ),
+        
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       body: GestureDetector(
         onTap: _toggleCardContent,
         child: Center(
@@ -65,15 +69,18 @@ class _FlashPageState extends State<FlashPage> {
                           child: Container(
                               alignment: Alignment.center,
                               height: 300,
-                              padding: const EdgeInsets.only(bottom: 55),
+//                              padding: const EdgeInsets.only(bottom: 55),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10.0),
                                 color: Colors.purple[50],
                                 border: Border.all(color: const Color.fromRGBO(206, 147, 216, 1), width:3,)
                                 ),
-                                child: Text(
-                                    widget.frontChar,
-                                    style: const TextStyle(fontSize: 200),
+                                child: AutoSizeText(
+                                  widget.frontChar,
+                                  style: const TextStyle(fontSize: 300.0, fontWeight: FontWeight.bold),
+                                  maxLines: 2, // Limit the text to 2 lines
+                                  minFontSize: 20.0, // Minimum font size
+                                  overflow: TextOverflow.ellipsis, // Handle overflow with ellipsis
                                 ),
                           ),
                         ),
@@ -88,16 +95,18 @@ class _FlashPageState extends State<FlashPage> {
                           child: Container(
                               alignment: Alignment.center,
                               height: 300,
-                              padding: const EdgeInsets.only(bottom: 55),
+//                              padding: const EdgeInsets.only(bottom: 55),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10.0),
                                 color: Colors.purple[50],
                                 border: Border.all(color: const Color.fromRGBO(206, 147, 216, 1), width:3,)
                                 ),
-                                child: Text(
-                                  
-                                    widget.backChar,
-                                    style: const TextStyle(fontSize: 200),
+                                child: AutoSizeText(
+                                  widget.backChar,
+                                  style: const TextStyle(fontSize: 300.0, fontWeight: FontWeight.bold),
+                                  maxLines: 2, // Limit the text to 2 lines
+                                  minFontSize: 20.0, // Minimum font size
+                                  overflow: TextOverflow.ellipsis, // Handle overflow with ellipsis
                                 ),
                           ),
                         ),
@@ -143,16 +152,23 @@ class _FlashPageState extends State<FlashPage> {
                     child: Container(
                         alignment: Alignment.center,
                         height: 300,
-                        padding: const EdgeInsets.only(bottom: 55),
+//                        padding: const EdgeInsets.only(bottom: 55),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10.0),
                           color: Colors.purple[50],
                           border: Border.all(color: const Color.fromRGBO(206, 147, 216, 1), width:3,)
                           ),
-                          child: Text(
-                              widget.frontChar,
-                              style: const TextStyle(fontSize: 200),
+                          child: AutoSizeText(
+                            widget.frontChar,
+                            style: const TextStyle(fontSize: 300.0, fontWeight: FontWeight.bold),
+                            maxLines: 2, // Limit the text to 2 lines
+                            minFontSize: 20.0, // Minimum font size
+                            overflow: TextOverflow.ellipsis, // Handle overflow with ellipsis
                           ),
+                          // Text(
+                          //     widget.frontChar,
+                          //     style: const TextStyle(fontSize: 200),
+                          // ),
                     ),
                   ),
                 ),

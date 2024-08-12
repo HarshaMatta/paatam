@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'DataFunctions.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key, required this.title});
@@ -26,6 +27,11 @@ class _SettingsPageState extends State<SettingsPage> {
     'Kannada',
     'Malayalam'
   ];
+
+Future<List<List<dynamic>>> vowelList= parseJsonTo2DArray("vowels", "English", "Telugu");
+Future<List<List<dynamic>>> consonantList= parseJsonTo2DArray("consonants", "English", "Telugu");
+Future<List<List<dynamic>>> clusterList= parseJsonTo2DArray("clusters", "English", "Telugu");
+
 
   @override
   Widget build(BuildContext context) {

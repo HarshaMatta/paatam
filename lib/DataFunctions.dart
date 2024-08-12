@@ -55,7 +55,7 @@ Future<void> openPage(Future<List<List<dynamic>>> futureList, BuildContext conte
         builder: (context) => FlashPage(frontChar: list[0][0], backChar: list[0][1], list: futureList,),
       ),
     );
-  
+ 
 }
 
 
