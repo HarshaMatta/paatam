@@ -8,9 +8,11 @@ class FlashPage extends StatefulWidget {
   final String frontChar;
   final String backChar;
   final Future<List<List<dynamic>>> list;
+  final String prefKey;
 
 
-  const FlashPage({super.key, required this.frontChar, required this.backChar, required this.list});
+
+  const FlashPage({super.key, required this.frontChar, required this.backChar, required this.list, required this.prefKey});
 
 
   @override
@@ -26,13 +28,15 @@ class _FlashPageState extends State<FlashPage> {
     });
   }
 
-  void _updateAndOpenPage(BuildContext context, Future<List<List<dynamic>>> list, bool correct) async {
-    var updatedList = changeIndex(list, correct);
+  void _updateAndOpenPage(BuildContext context, Future<List<List<dynamic>>> list, bool correct, String key) async {
+    var updatedList = changeIndex(list, correct, key);
+    storeList(key, list);
+
     setState(() {
       list = updatedList;
     });
     //debugPrint(vowelList); // Log the updated vowelList
-    openPage(list, context);
+    openPage(list, context, key);
   }
 
 
@@ -120,7 +124,8 @@ class _FlashPageState extends State<FlashPage> {
                         children: [
                           ElevatedButton(
                             onPressed: () {
-                              _updateAndOpenPage(context, widget.list, false);
+                              _updateAndOpenPage(context, widget.list, false, widget.prefKey);
+                              storeList(widget.prefKey, widget.list);
                             },
                             style: ElevatedButton.styleFrom(
                               shape: const CircleBorder(),
@@ -130,7 +135,8 @@ class _FlashPageState extends State<FlashPage> {
                           ),
                           ElevatedButton(
                             onPressed: () {
-                              _updateAndOpenPage(context, widget.list, true);
+                              _updateAndOpenPage(context, widget.list, true, widget.prefKey);
+                              storeList(widget.prefKey, widget.list);
                             },
                             style: ElevatedButton.styleFrom(
                               shape: const CircleBorder(),

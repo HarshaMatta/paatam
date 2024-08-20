@@ -4,7 +4,8 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'FlashPage.dart';
-
+import "main.dart";
+import 'package:shared_preferences/shared_preferences.dart';
 
 
 Future<List<List<dynamic>>> parseJsonTo2DArray(String category, String lang1, String lang2) async {
@@ -41,25 +42,33 @@ Future<List<List<dynamic>>> parseJsonTo2DArray(String category, String lang1, St
   return result;
 }
 
-Future<List<List<dynamic>>> vowelList= parseJsonTo2DArray("vowels", "English", "Telugu");
-Future<List<List<dynamic>>> consonantList= parseJsonTo2DArray("consonants", "English", "Telugu");
-Future<List<List<dynamic>>> clusterList= parseJsonTo2DArray("clusters", "English", "Telugu");
 
 
-Future<void> openPage(Future<List<List<dynamic>>> futureList, BuildContext context, ) async {
+
+Future<void> openPage(Future<List<List<dynamic>>> futureList, BuildContext context, String key  ) async {
   List<List<dynamic>> list = await futureList; // Await the future to get the actual list
 
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => FlashPage(frontChar: list[0][0], backChar: list[0][1], list: futureList,),
+        builder: (context) => FlashPage(frontChar: list[0][0], backChar: list[0][1], list: futureList, prefKey: key,),
       ),
     );
+
+
  
 }
 
 
-Future<List<List<dynamic>>> changeIndex(Future<List<List<dynamic>>> futureList,bool isCorrect ) async{
+void storeList(String key, Future<List<List<dynamic>>> list) async {
+  List<List<dynamic>> resolvedList = await list;
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  await prefs.setString(key, jsonEncode(resolvedList));
+}
+
+
+
+Future<List<List<dynamic>>> changeIndex(Future<List<List<dynamic>>> futureList, bool isCorrect, String key ) async{
   List<List<dynamic>> list = await futureList; // Await the future to get the actual list
   int originalIndex = 0;
   int newIndex = 5;
@@ -88,7 +97,7 @@ Future<List<List<dynamic>>> changeIndex(Future<List<List<dynamic>>> futureList,b
     list.insert(newIndex, item);     // Insert the item at the new index
   }
 
+  storeList(key, futureList);
+
   return list;
 }
-
-
