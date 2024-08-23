@@ -305,100 +305,117 @@ Future<List<StatisticsItem>> listStats(Future<List<List<dynamic>>> futureList) a
     );
   }
 
-  GestureDetector _buildGridItem(String title, Future<List<List<dynamic>>> list,
-      IconData icon) {
-    return GestureDetector(
-      onTap: () {
-        _saveLists();
-        _loadLists();
-        print("title is $title");
-        openPage(list, context, title);
-      },
-      child: Container(
-        padding: const EdgeInsets.all(3),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10.0),
-          color: Colors.purple[50],
-          border: Border.all(
-              color: const Color.fromRGBO(206, 147, 216, 1), width: 3),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            ClipRRect(
-              borderRadius: BorderRadius.circular(20),
-              child: Container(
-                color: Colors.purple[400],
-                child: Align(
-                  alignment: Alignment.center,
-                  child: Text(
-                    title,
-                    style: const TextStyle(
-                        color: Colors.white,
-                        fontVariations: [
-                          FontVariation('wght', 750),
-                          FontVariation('wdth', 150)
-                        ]),
-                  ),
+  GestureDetector _buildGridItem(String title, Future<List<List<dynamic>>> list, IconData icon) {
+  return GestureDetector(
+    onTap: () {
+      _saveLists();
+      _loadLists();
+      print("title is $title");
+      openPage(list, context, title);
+    },
+    child: Container(
+      padding: const EdgeInsets.all(3),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10.0),
+        color: Colors.purple[50],
+        border: Border.all(
+            color: const Color.fromRGBO(206, 147, 216, 1), width: 3),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          ClipRRect(
+            borderRadius: BorderRadius.circular(20),
+            child: Container(
+              color: Colors.purple[400],
+              child: Align(
+                alignment: Alignment.center,
+                child: Text(
+                  title,
+                  style: const TextStyle(
+                      color: Colors.white,
+                      fontVariations: [
+                        FontVariation('wght', 750),
+                        FontVariation('wdth', 150)
+                      ]),
                 ),
               ),
             ),
-            GridView.count(
-              //primary: false,
-              shrinkWrap: true,
-              crossAxisCount: 2,
-              crossAxisSpacing: 1.0, 
-              mainAxisSpacing: 1.0,  
-              padding: const EdgeInsets.all(1),
-              children: const <Widget>[
-                Center(
-                  child: AutoSizeText(
-                      "a",
-                      style: const TextStyle(fontSize: 400.0, fontWeight: FontWeight.bold),
-                      maxLines: 1, // Limit the text to 2 lines
-                      minFontSize: 20.0, // Minimum font size
-                      overflow: TextOverflow.ellipsis, // Handle overflow with ellipsis
-                    ),
-                  ),
-                Center(child: Icon(CupertinoIcons.arrow_turn_right_down)),
-                Center(child: Icon(CupertinoIcons.arrow_turn_down_right)),
-                Center(
-                    child: 
-                      AutoSizeText(
-                        "అ",
-                        style: const TextStyle(fontSize: 400.0, fontWeight: FontWeight.bold),
-                        maxLines: 1, // Limit the text to 2 lines
-                        minFontSize: 20.0, // Minimum font size
-                        overflow: TextOverflow.ellipsis, // Handle overflow with ellipsis
+          ),
+          FutureBuilder<List<List<dynamic>>>(
+            future: list,
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const CircularProgressIndicator(); // Show a loading indicator while waiting
+              } else if (snapshot.hasError) {
+                return Text('Error: ${snapshot.error}'); // Handle any errors
+              } else if (snapshot.hasData) {
+                List<List<dynamic>> dataList = snapshot.data!;
+                return GridView.count(
+                  shrinkWrap: true,
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 1.0,
+                  mainAxisSpacing: 1.0,
+                  padding: const EdgeInsets.all(1),
+                  children: <Widget>[
+                    Center(
+                      child: AutoSizeText(
+                        dataList[0][0].toString(), // Access the data from the resolved Future
+                        style: const TextStyle(
+                          fontSize: 400.0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        maxLines: 1,
+                        minFontSize: 20.0,
+                        overflow: TextOverflow.ellipsis,
                       ),
-                ),
-              ],
-            ),
-            FutureBuilder<List<StatisticsItem>>(
-              future: listStats(list),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const CircularProgressIndicator(); // Show a loading indicator while waiting
-                } else if (snapshot.hasError) {
-                  return Text('Error: ${snapshot.error}'); // Handle any errors
-                } else if (snapshot.hasData) {
-                  return ProgressBarChart(
-                    values: snapshot.data!,
-                    height: 20,
-                    borderRadius: 5,
-                    totalPercentage: 1100,
-                    unitLabel: 'kg',
-                  );
-                } else {
-                  return const Text('No data available'); // Handle the case where there's no data
-                }
-              },
-            )
-
-          ],
-        ),
+                    ),
+                    Center(child: Icon(icon)),
+                    Center(child: Icon(CupertinoIcons.arrow_turn_down_right)),
+                    Center(
+                      child: AutoSizeText(
+                        dataList[0][1].toString(), // Access the data from the resolved Future
+                        style: const TextStyle(
+                          fontSize: 400.0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        maxLines: 1,
+                        minFontSize: 20.0,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                  ],
+                );
+              } else {
+                return const Text('No data available'); // Handle the case where there's no data
+              }
+            },
+          ),
+          FutureBuilder<List<StatisticsItem>>(
+            future: listStats(list),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const CircularProgressIndicator(); // Show a loading indicator while waiting
+              } else if (snapshot.hasError) {
+                return Text('Error: ${snapshot.error}'); // Handle any errors
+              } else if (snapshot.hasData) {
+                return ProgressBarChart(
+                  values: snapshot.data!,
+                  height: 20,
+                  borderRadius: 5,
+                  totalPercentage: 1100,
+                  unitLabel: 'kg',
+                );
+              } else {
+                return const Text('No data available'); // Handle the case where there's no data
+              }
+            },
+          ),
+        ],
       ),
-    );
-  }
+    ),
+  );
+}
+
 }
