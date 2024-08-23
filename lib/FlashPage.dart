@@ -48,7 +48,6 @@ class _FlashPageState extends State<FlashPage> {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.home),
-        
         onPressed: () => Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (context) => const MyHomePage(title: 'PAATAM')),
@@ -171,10 +170,6 @@ class _FlashPageState extends State<FlashPage> {
                             minFontSize: 20.0, // Minimum font size
                             overflow: TextOverflow.ellipsis, // Handle overflow with ellipsis
                           ),
-                          // Text(
-                          //     widget.frontChar,
-                          //     style: const TextStyle(fontSize: 200),
-                          // ),
                     ),
                   ),
                 ),

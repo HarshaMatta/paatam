@@ -84,7 +84,6 @@ class _MyHomePageState extends State<MyHomePage> {
     _loadLanguageSettings();
     _saveLists();
     _loadLists();
-
   }
 
   void _loadLanguageSettings() async {
@@ -93,13 +92,30 @@ class _MyHomePageState extends State<MyHomePage> {
     dropdownValueInput = prefs.getString('inputLanguage') ?? 'English';
     dropdownValueOutput = prefs.getString('outputLanguage') ?? 'Telugu';
   });
-  _updateLists();
+
+  bool isFirstRun = prefs.getBool('isFirstRun') ?? true;
+
+  if (isFirstRun) {
+    _updateLists();
+    prefs.setBool('isFirstRun', false); // Mark the app as no longer in first run
+  }
 }
 
-  void _updateLists() {
-    vowelList = parseJsonTo2DArray("vowels", dropdownValueInput, dropdownValueOutput);
-    consonantList = parseJsonTo2DArray("consonants", dropdownValueInput, dropdownValueOutput);
-    clusterList = parseJsonTo2DArray("clusters", dropdownValueInput, dropdownValueOutput);
+  void _updateLists() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    vowelList = parseJsonTo2DArray("Vowels", dropdownValueInput, dropdownValueOutput);
+    consonantList = parseJsonTo2DArray("Consonants", dropdownValueInput, dropdownValueOutput);  
+    clusterList = parseJsonTo2DArray("Clusters", dropdownValueInput, dropdownValueOutput);
+
+    List<List<dynamic>> resolvedVowelList = await vowelList;
+    List<List<dynamic>> resolvedConsonantList = await consonantList;
+    List<List<dynamic>> resolvedClusterList = await clusterList;
+
+    prefs.setString('Vowels', jsonEncode(resolvedVowelList));
+    prefs.setString('Consonants', jsonEncode(resolvedConsonantList));
+    prefs.setString('Clusters', jsonEncode(resolvedClusterList));
+
     _saveLists();
     _loadLists();
   }
@@ -110,23 +126,19 @@ class _MyHomePageState extends State<MyHomePage> {
   await prefs.setString('outputLanguage', dropdownValueOutput);
 }
 
-void _saveLists() async {
-  SharedPreferences prefs = await SharedPreferences.getInstance();
+  void _saveLists() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
 
-  List<List<dynamic>> resolvedVowelList = await vowelList;
-  List<List<dynamic>> resolvedConsonantList = await consonantList;
-  List<List<dynamic>> resolvedClusterList = await clusterList;
+    List<List<dynamic>> resolvedVowelList = await vowelList;
+    List<List<dynamic>> resolvedConsonantList = await consonantList;
+    List<List<dynamic>> resolvedClusterList = await clusterList;
+    
+    prefs.setString('Vowels', jsonEncode(resolvedVowelList));    
+    prefs.setString('Consonants', jsonEncode(resolvedConsonantList));
+    prefs.setString('Clusters', jsonEncode(resolvedClusterList));
 
-  await prefs.setString('Vowels', jsonEncode(resolvedVowelList));
-  //List<StatisticsItem> vowelStats = await listStats(vowelList);
+  }
 
-  await prefs.setString('Consonants', jsonEncode(resolvedConsonantList));
-  //List<StatisticsItem> vowelStats = await listStats(vowelList);
-
-  await prefs.setString('Clusters', jsonEncode(resolvedClusterList));
-  //List<StatisticsItem> vowelStats = await listStats(vowelList);
-
-}
 
 
 
@@ -145,6 +157,7 @@ Future<void> _loadLists() async {
     clusterList = Future.value(loadedClusterList);
   });
 }
+
 
 
 Future<List<StatisticsItem>> listStats(Future<List<List<dynamic>>> futureList) async {
@@ -187,6 +200,7 @@ Future<List<StatisticsItem>> listStats(Future<List<List<dynamic>>> futureList) a
                   (String? newValue) {
                 setState(() {
                   dropdownValueInput = newValue!;
+                  print(" output lang is  $dropdownValueInput");
                 });
               }),
               const SizedBox(height: 10),
@@ -195,6 +209,7 @@ Future<List<StatisticsItem>> listStats(Future<List<List<dynamic>>> futureList) a
                   (String? newValue) {
                 setState(() {
                   dropdownValueOutput = newValue!;
+                  print(" output lang is  $dropdownValueOutput");
                 });
               }),
             ],
@@ -296,6 +311,7 @@ Future<List<StatisticsItem>> listStats(Future<List<List<dynamic>>> futureList) a
       onTap: () {
         _saveLists();
         _loadLists();
+        print("title is $title");
         openPage(list, context, title);
       },
       child: Container(

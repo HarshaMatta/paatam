@@ -14,9 +14,9 @@ Future<List<List<dynamic>>> parseJsonTo2DArray(String category, String lang1, St
   final data = await json.decode(response);
 
   // Check if the category exists in the JSON data
-  if (!data.containsKey(category)) {
-    throw Exception('Category not found');
-  }
+  // if (!data.containsKey(category)) {
+  //   throw Exception('Category not found');
+  // }
 
   final categoryData = data[category];
 
@@ -27,6 +27,8 @@ Future<List<List<dynamic>>> parseJsonTo2DArray(String category, String lang1, St
 
   final lang1Data = List<String>.from(categoryData[lang1]);
   final lang2Data = List<String>.from(categoryData[lang2]);
+  final englishData = List<String>.from(categoryData["English"]);
+
 
   if (lang1Data.length != lang2Data.length) {
     throw Exception('The languages have different lengths');
@@ -34,10 +36,20 @@ Future<List<List<dynamic>>> parseJsonTo2DArray(String category, String lang1, St
 
   // Generate the 2D array
   List<List<dynamic>> result = [];
-  for (int i = 0; i < lang1Data.length; i++) {
-    result.add([lang1Data[i], lang2Data[i], 0]);
+  
+  // for (int i = 0; i < lang1Data.length; i++) {
 
-  }
+  //   result.add([lang1Data[i], lang2Data[i], 0]);
+
+  // }
+  for (int i = 0; i < lang1Data.length; i++) {
+    if(lang1Data[i] != ""){
+        if(lang2Data[i] != ""){
+          result.add([lang1Data[i], lang2Data[i], 0]);}
+        else {
+          result.add([lang1Data[i], englishData[i], 0]);}
+        }
+    }
 
   return result;
 }
