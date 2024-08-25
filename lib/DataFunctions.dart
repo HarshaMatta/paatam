@@ -43,8 +43,18 @@ Future<List<List<dynamic>>> parseJsonTo2DArray(String category, String lang1, St
 
   // }
   for (int i = 0; i < lang1Data.length; i++) {
-    if(lang1Data[i] != ""){
-        if(lang2Data[i] != ""){
+    if(lang2Data[i] != ""){
+        if(lang1Data[i] != ""){
+          result.add([lang2Data[i], lang1Data[i], 0]);}
+        else {
+          result.add([englishData[i], lang1Data[i], 0]);}
+        }
+    }
+
+
+  for (int i = 0; i < lang1Data.length; i++) {
+    if(lang2Data[i] != ""){
+        if(lang1Data[i] != ""){
           result.add([lang1Data[i], lang2Data[i], 0]);}
         else {
           result.add([lang1Data[i], englishData[i], 0]);}
@@ -57,19 +67,25 @@ Future<List<List<dynamic>>> parseJsonTo2DArray(String category, String lang1, St
 
 
 
-Future<void> openPage(Future<List<List<dynamic>>> futureList, BuildContext context, String key  ) async {
-  List<List<dynamic>> list = await futureList; // Await the future to get the actual list
+Future<void> openPage(Future<List<List<dynamic>>> futureList, BuildContext context, String key) async {
+  // Await the future to get the actual list
+  List<List<dynamic>> list = await futureList;
 
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => FlashPage(frontChar: list[0][0], backChar: list[0][1], list: futureList, prefKey: key,),
+  Navigator.push(
+    context,
+    MaterialPageRoute(
+      builder: (context) => FlashPage(
+        frontChar: list[0][0], 
+        backChar: list[0][1], 
+        list: futureList, 
+        prefKey: key,
       ),
-    );
-
-
- 
+      fullscreenDialog: true, // Disable swipe back on iOS
+    ),
+  );
 }
+
+
 
 
 void storeList(String key, Future<List<List<dynamic>>> list) async {
@@ -85,12 +101,18 @@ Future<List<List<dynamic>>> changeIndex(Future<List<List<dynamic>>> futureList, 
   int originalIndex = 0;
   int newIndex = 5;
 
-  List<int> fibonacciNumbers = [0, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144 ];
+  List<int> fibonacciNumbers = [1, 5, 9, 14, 20, 27, 35, 44, 55, 60, 80, 100, 200, 300 ];
 
 
   if (isCorrect){
-    list[0][2] = list[0][2] +2;
-    newIndex = fibonacciNumbers[list[0][2]];
+    list[0][2] = list[0][2] +1;
+    if (list[0][2] < fibonacciNumbers.length){
+    newIndex = fibonacciNumbers[list[0][2]];}
+    else{
+      newIndex = 200;
+    }
+    print(" the newIndex is $newIndex");
+    print(list[0][2]);
   }
   else {
     newIndex = 2;
@@ -98,8 +120,8 @@ Future<List<List<dynamic>>> changeIndex(Future<List<List<dynamic>>> futureList, 
   }
   
   if (originalIndex < list.length && newIndex < list.length) {
-    var item = list[originalIndex];  // Retrieve the item
-    list.removeAt(originalIndex);    // Remove the item from the original index
+    var item = list[originalIndex];  
+    list.removeAt(originalIndex);    
     
     // Adjust newIndex if it's after the originalIndex due to the removal
     if (newIndex > originalIndex) {
@@ -108,6 +130,13 @@ Future<List<List<dynamic>>> changeIndex(Future<List<List<dynamic>>> futureList, 
 
     list.insert(newIndex, item);     // Insert the item at the new index
   }
+
+    if (newIndex > list.length) {
+      print(" index is large");
+      var item = list[originalIndex];  
+      list.removeAt(originalIndex);    
+      list.insert(list.length -1, item);     // Insert the item at the new index
+    }
 
   storeList(key, futureList);
 

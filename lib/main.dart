@@ -66,13 +66,6 @@ class _MyHomePageState extends State<MyHomePage> {
     'Malayalam'
   ];
 
-  // final List<StatisticsItem> stats = [
-  // StatisticsItem(Colors.blue, 500, title: 'Type 1'),
-  // StatisticsItem(Colors.green, 200, title: 'Type 2'),
-  // StatisticsItem(Colors.red, 300, title: 'Type 3'),
-  // StatisticsItem(Colors.yellow, 100, title: 'Type 4'),
-  // ];
-
   late Future<List<List<dynamic>>> vowelList;
   late Future<List<List<dynamic>>> consonantList;
   late Future<List<List<dynamic>>> clusterList;
@@ -111,6 +104,9 @@ class _MyHomePageState extends State<MyHomePage> {
     List<List<dynamic>> resolvedVowelList = await vowelList;
     List<List<dynamic>> resolvedConsonantList = await consonantList;
     List<List<dynamic>> resolvedClusterList = await clusterList;
+
+    print(resolvedVowelList);
+
 
     prefs.setString('Vowels', jsonEncode(resolvedVowelList));
     prefs.setString('Consonants', jsonEncode(resolvedConsonantList));
@@ -171,11 +167,13 @@ Future<List<StatisticsItem>> listStats(Future<List<List<dynamic>>> futureList) a
     // Determine color based on mastery level
     Color barColor;
     if (masteryLevel <= 2) {
-      barColor = Colors.red;
-    } else if (masteryLevel <= 4) {
-      barColor = Colors.yellow;
+      barColor = Colors.grey;
+    } else if (masteryLevel <= 8) {
+      barColor = const Color.fromARGB(255, 230, 179, 255);
+    } else if (masteryLevel <= 30) {
+      barColor = const Color.fromARGB(255, 209, 118, 255);
     } else {
-      barColor = Colors.green;
+      barColor = const Color.fromARGB(255, 184, 41, 255);
     }
 
     // Create a StatisticsItem and add it to the list

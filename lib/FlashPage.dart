@@ -72,7 +72,7 @@ class _FlashPageState extends State<FlashPage> {
                           child: Container(
                               alignment: Alignment.center,
                               height: 300,
-//                              padding: const EdgeInsets.only(bottom: 55),
+                              padding: const EdgeInsets.only(bottom: 35),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10.0),
                                 color: Colors.purple[50],
@@ -96,15 +96,18 @@ class _FlashPageState extends State<FlashPage> {
                         child: AspectRatio(
                           aspectRatio: 1.2,
                           child: Container(
-                              alignment: Alignment.center,
+                              alignment: Alignment.topCenter,
                               height: 300,
-//                              padding: const EdgeInsets.only(bottom: 55),
+                              padding: const EdgeInsets.only(bottom: 35),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10.0),
                                 color: Colors.purple[50],
                                 border: Border.all(color: const Color.fromRGBO(206, 147, 216, 1), width:3,)
                                 ),
-                                child: AutoSizeText(
+                                
+                                
+                                child: 
+                                AutoSizeText(
                                   widget.backChar,
                                   style: const TextStyle(fontSize: 300.0, fontWeight: FontWeight.bold),
                                   maxLines: 2, // Limit the text to 2 lines
@@ -149,7 +152,7 @@ class _FlashPageState extends State<FlashPage> {
                   ],
                 )
               : Padding(
-                padding: const EdgeInsets.only(top:100.0, left:30, right: 30),
+                padding: const EdgeInsets.only(top: 100.0, left:30, right: 30),
                 child: Align(
                   alignment: Alignment.topCenter,
                   child: AspectRatio(
@@ -157,7 +160,7 @@ class _FlashPageState extends State<FlashPage> {
                     child: Container(
                         alignment: Alignment.center,
                         height: 300,
-//                        padding: const EdgeInsets.only(bottom: 55),
+                        padding: const EdgeInsets.only(bottom: 35),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10.0),
                           color: Colors.purple[50],
