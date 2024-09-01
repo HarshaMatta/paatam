@@ -3,8 +3,6 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'DataFunctions.dart';
-import 'FourPage.dart';
-import 'FlashPage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:progress_bar_chart/progress_bar_chart.dart';
 import 'package:auto_size_text/auto_size_text.dart';
@@ -370,7 +368,7 @@ Future<List<StatisticsItem>> listStats(Future<List<List<dynamic>>> futureList) a
                       ),
                     ),
                     Center(child: Icon(icon)),
-                    Center(child: Icon(CupertinoIcons.arrow_turn_down_right)),
+                    const Center(child: Icon(CupertinoIcons.arrow_turn_down_right)),
                     Center(
                       child: AutoSizeText(
                         dataList[0][1].toString(), // Access the data from the resolved Future

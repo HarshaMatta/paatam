@@ -1,10 +1,7 @@
 import 'dart:convert';
-import 'dart:ffi';
-import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'FlashPage.dart';
-import "main.dart";
 import 'package:shared_preferences/shared_preferences.dart';
 
 
