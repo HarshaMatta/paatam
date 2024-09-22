@@ -31,30 +31,15 @@ Future<List<List<dynamic>>> parseJsonTo2DArray(String category, String lang1, St
     throw Exception('The languages have different lengths');
   }
 
-  // Generate the 2D array
   List<List<dynamic>> result = [];
   
-  // for (int i = 0; i < lang1Data.length; i++) {
 
-  //   result.add([lang1Data[i], lang2Data[i], 0]);
-
-  // }
   for (int i = 0; i < lang1Data.length; i++) {
     if(lang2Data[i] != ""){
         if(lang1Data[i] != ""){
           result.add([lang2Data[i], lang1Data[i], 0]);}
         else {
           result.add([englishData[i], lang1Data[i], 0]);}
-        }
-    }
-
-
-  for (int i = 0; i < lang1Data.length; i++) {
-    if(lang2Data[i] != ""){
-        if(lang1Data[i] != ""){
-          result.add([lang1Data[i], lang2Data[i], 0]);}
-        else {
-          result.add([lang1Data[i], englishData[i], 0]);}
         }
     }
 
@@ -98,7 +83,7 @@ Future<List<List<dynamic>>> changeIndex(Future<List<List<dynamic>>> futureList, 
   int originalIndex = 0;
   int newIndex = 5;
 
-  List<int> fibonacciNumbers = [1, 5, 9, 14, 20, 27, 35, 44, 55, 60, 80, 100, 200, 300 ];
+  List<int> fibonacciNumbers = [1, 5, 10, 20, 40, 80, 160, 320 ];
 
 
   if (isCorrect){
@@ -108,8 +93,6 @@ Future<List<List<dynamic>>> changeIndex(Future<List<List<dynamic>>> futureList, 
     else{
       newIndex = 200;
     }
-    print(" the newIndex is $newIndex");
-    print(list[0][2]);
   }
   else {
     newIndex = 2;
@@ -132,7 +115,7 @@ Future<List<List<dynamic>>> changeIndex(Future<List<List<dynamic>>> futureList, 
       print(" index is large");
       var item = list[originalIndex];  
       list.removeAt(originalIndex);    
-      list.insert(list.length -1, item);     // Insert the item at the new index
+      list.insert(list.length, item);     // Insert the item at the new index
     }
 
   storeList(key, futureList);
