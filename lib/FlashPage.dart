@@ -62,13 +62,12 @@ class _FlashPageState extends State<FlashPage> {
               ? Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-
                      Padding(
-                      padding: const EdgeInsets.only(top:100.0, left:30, right: 30),
+                      padding: const EdgeInsets.only(top:80.0, left:30, right: 30),
                       child: Align(
                         alignment: Alignment.topCenter,
                         child: AspectRatio(
-                          aspectRatio: 1.2,
+                          aspectRatio: 1.4,
                           child: Container(
                               alignment: Alignment.center,
                               height: 300,
@@ -89,12 +88,12 @@ class _FlashPageState extends State<FlashPage> {
                         ),
                       ),
                     ),
-                      Padding(
-                      padding: const EdgeInsets.only(top:20.0, left:30, right: 30),
+                    Padding(
+                      padding: const EdgeInsets.only(top:10.0, left:30, right: 30),
                       child: Align(
                         alignment: Alignment.topCenter,
                         child: AspectRatio(
-                          aspectRatio: 1.2,
+                          aspectRatio: 1.4,
                           child: Container(
                               alignment: Alignment.topCenter,
                               height: 300,
@@ -118,7 +117,6 @@ class _FlashPageState extends State<FlashPage> {
                         ),
                       ),
                     ),
-                    const SizedBox(height: 50),
                     Padding(
                       padding: const EdgeInsets.only(bottom: 20),
                       child: Row(
@@ -131,9 +129,9 @@ class _FlashPageState extends State<FlashPage> {
                             },
                             style: ElevatedButton.styleFrom(
                               shape: const CircleBorder(),
-                              padding: const EdgeInsets.all(20),
+                              padding: const EdgeInsets.all(15),
                             ),
-                            child: const Icon(Icons.close, size: 50),
+                            child: const Icon(Icons.close, size: 40),
                           ),
                           ElevatedButton(
                             onPressed: () {
@@ -142,41 +140,95 @@ class _FlashPageState extends State<FlashPage> {
                             },
                             style: ElevatedButton.styleFrom(
                               shape: const CircleBorder(),
-                              padding: const EdgeInsets.all(20),
+                              padding: const EdgeInsets.all(15),
                             ),
-                            child: const Icon(Icons.check, size: 50),
+                            child: const Icon(Icons.check, size: 40),
                           ),
                         ],
                       ),
                     ),
                   ],
                 )
-              : Padding(
-                padding: const EdgeInsets.only(top: 100.0, left:30, right: 30),
-                child: Align(
-                  alignment: Alignment.topCenter,
-                  child: AspectRatio(
-                    aspectRatio: 1.2,
-                    child: Container(
-                        alignment: Alignment.center,
-                        height: 300,
-                        padding: const EdgeInsets.only(bottom: 35),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10.0),
-                          color: Colors.purple[50],
-                          border: Border.all(color: const Color.fromRGBO(206, 147, 216, 1), width:3,)
+              : Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                     Padding(
+                      padding: const EdgeInsets.only(top:80.0, left:30, right: 30),
+                      child: Align(
+                        alignment: Alignment.topCenter,
+                        child: AspectRatio(
+                          aspectRatio: 1.4,
+                          child: Container(
+                              alignment: Alignment.center,
+                              height: 300,
+                              padding: const EdgeInsets.only(bottom: 35),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10.0),
+                                color: Colors.purple[50],
+                                border: Border.all(color: const Color.fromRGBO(206, 147, 216, 1), width:3,)
+                                ),
+                                child: AutoSizeText(
+                                  widget.frontChar,
+                                  style: const TextStyle(fontSize: 300.0, fontWeight: FontWeight.bold),
+                                  maxLines: 2, // Limit the text to 2 lines
+                                  minFontSize: 20.0, // Minimum font size
+                                  overflow: TextOverflow.ellipsis, // Handle overflow with ellipsis
+                                ),
                           ),
-                          child: AutoSizeText(
-                            widget.frontChar,
-                            style: const TextStyle(fontSize: 300.0, fontWeight: FontWeight.bold),
-                            maxLines: 2, // Limit the text to 2 lines
-                            minFontSize: 20.0, // Minimum font size
-                            overflow: TextOverflow.ellipsis, // Handle overflow with ellipsis
-                          ),
+                        ),
+                      ),
                     ),
-                  ),
+                    Padding(
+                      padding: const EdgeInsets.only(top:10.0, left:30, right: 30),
+                      child: Align(
+                        alignment: Alignment.topCenter,
+                        child: AspectRatio(
+                          aspectRatio: 1.4,
+                          child: Container(
+                              alignment: Alignment.topCenter,
+                              height: 300,
+                              padding: const EdgeInsets.only(bottom: 35),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10.0),
+                                color: Colors.purple[50],
+                                border: Border.all(color: const Color.fromRGBO(206, 147, 216, 1), width:3,)
+                                ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Opacity(
+                      opacity: 0.0,
+                      child: Padding(
+                        padding: const EdgeInsets.only(bottom: 20),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            ElevatedButton(
+                              onPressed: () {
+                              },
+                              style: ElevatedButton.styleFrom(
+                                shape: const CircleBorder(),
+                                padding: const EdgeInsets.all(15),
+                              ),
+                              child: const Icon(Icons.close, size: 40),
+                            ),
+                            ElevatedButton(
+                              onPressed: () {
+                              },
+                              style: ElevatedButton.styleFrom(
+                                shape: const CircleBorder(),
+                                padding: const EdgeInsets.all(15),
+                              ),
+                              child: const Icon(Icons.check, size: 40),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-              ),
+              
         ),
       ),
     );
